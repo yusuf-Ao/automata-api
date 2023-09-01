@@ -2,6 +2,7 @@ package io.aycodes.automataapi.users.controller;
 
 
 import io.aycodes.automataapi.common.config.SecurityConfig;
+import io.aycodes.automataapi.common.dtos.CustomException;
 import io.aycodes.automataapi.common.dtos.CustomResponse;
 import io.aycodes.automataapi.common.dtos.user.UserSignupDto;
 import io.aycodes.automataapi.users.model.User;
@@ -48,6 +49,14 @@ public class UserController {
                     .build();
             log.info(message);
             return new ResponseEntity<>(response, HttpStatus.CREATED);
+        } catch (final CustomException cs) {
+            final String message = cs.getMessage();
+            log.error(message, cs);
+            CustomResponse response = CustomResponse.builder().timeStamp(LocalDateTime.now())
+                    .statusCode(HttpStatus.EXPECTATION_FAILED.value()).status(HttpStatus.EXPECTATION_FAILED)
+                    .message(message).success(false)
+                    .build();
+            return new ResponseEntity<>(response, HttpStatus.EXPECTATION_FAILED);
         } catch (final Exception e) {
             final String message = "Unable to create user";
             log.error(message, e);

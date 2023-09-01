@@ -34,7 +34,7 @@ security:
     issuer: aycodes
     audience: aycodes
     secret-key: $2a$20$Jn08uDdO35bgvcnlBSrcmeAOIAeiUMnp00C6tJBjtdVJPTfBwkxAC
-    #    2 hours validity
-    token-validity: 7200
+    #    8 hours validity
+    token-validity: 28800
     clock-skew: 10
 
