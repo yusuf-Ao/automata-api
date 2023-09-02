@@ -26,11 +26,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(final UserSignupDto userSignupDto) throws CustomException {
+        final String email = userSignupDto.getEmail();
+        final String username = userSignupDto.getUsername();
+        log.info("checking if email exists");
+        if (userRepo.findByEmail(email).isPresent()) {
+            throw new CustomException("Email is already in use");
+        }
+
+        if (userRepo.findByUsername(username).isPresent()) {
+            throw new CustomException("Username is already in use");
+        }
+
         try {
             log.info("Now creating user");
             final User user = User.builder()
-                    .email(userSignupDto.getEmail())
-                    .username(userSignupDto.getUsername())
+                    .email(email)
+                    .username(username)
                     .password(passwordEncoder.encode(userSignupDto.getPassword()))
                     .build();
             return userRepo.save(user);
