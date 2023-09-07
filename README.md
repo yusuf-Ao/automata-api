@@ -1,2 +1,2 @@
 # automata-api
-API Development and Testing for Product Catalog
+Mini Automation Framework for TestCase Management and E2E Testing

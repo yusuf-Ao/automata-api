@@ -1,6 +1,6 @@
-package io.aycodes.automataapi.products.repository;
+package io.aycodes.automataapi.testcase.repository;
 
-import io.aycodes.automataapi.products.model.Product;
+import io.aycodes.automataapi.testcase.model.TestCase;
 import io.aycodes.automataapi.users.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,13 +10,13 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface ProductRepo extends JpaRepository<Product, Long> {
+public interface TestCaseRepo extends JpaRepository<TestCase, Long> {
 
-    Page<Product> findAllByUser(User user, Pageable pageable);
+    Page<TestCase> findAllByUser(User user, Pageable pageable);
 
-    Optional<Product> findByIdAndUser(Long id, User user);
+    Optional<TestCase> findByIdAndUser(Long id, User user);
 
     void deleteByIdAndUser(Long id, User user);
 
-    boolean existsByName(String name);
+    boolean existsByTitle(String title);
 }
